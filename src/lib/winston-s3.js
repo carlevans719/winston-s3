@@ -133,7 +133,8 @@ module.exports = winston.transports.S3 = (function(superClass) {
     return this._shipNow();
   };
 
-  S3.prototype._shipNow = function() {
+  S3.prototype._shipNow = function(cb) {
+    cb = typeof cb === 'function' ? cb : function () {}
     var keys, logFilePath;
     if (this.shipping == null) {
       this.shipping = 0;
@@ -160,11 +161,13 @@ module.exports = winston.transports.S3 = (function(superClass) {
               }
               console.error('Error shipping file', err);
               reject(err)
+              return cb(err, null)
             }
             if (res.statusCode !== 200) {
               _this.shipQueue[logFilePath] = logFilePath;
               console.error("S3 error, code " + res.statusCode);
               reject(err)
+              return cb(err, null)
             }
             if (_this._debug) {
               console.log(res);
@@ -173,8 +176,10 @@ module.exports = winston.transports.S3 = (function(superClass) {
               if (err) {
                 console.error('Error unlinking file', err);
                 reject(err)
+                return cb(err, null)
               } else {
                 resolve(true)
+                return cb(null, true)
               }
             });
           };
