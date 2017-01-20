@@ -2,13 +2,12 @@
   "name": "winston-s3",
   "version": "1.0.0",
   "description": "S3 transport for Winston",
-  "main": "src/lib/winston-s3.js",
+  "main": "src/main.js",
   "dependencies": {
     "winston": "~0.7.2",
     "knox": "~0.9.1",
     "node-uuid": "~1.4.0",
     "findit": "~0.1.2",
-    "coffee-script": "~1.4.0",
     "temp": "~0.5.0"
   },
   "devDependencies": {},
@@ -17,7 +16,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/PinionTech/winston-s3.git"
+    "url": "https://github.com/carlevans719/winston-s3.git"
   },
   "keywords": [
     "winston",
