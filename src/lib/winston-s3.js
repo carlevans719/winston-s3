@@ -115,8 +115,9 @@ module.exports = winston.transports.S3 = (function(superClass) {
     }
   };
 
-  S3.prototype.shipIt = function(logFilePath) {
-    return this.queueIt(logFilePath);
+  S3.prototype.shipIt = function(logFilePath, cb) {
+    cb = typeof cb === 'function' ? cb : function () {}
+    return this.queueIt(logFilePath, cb);
   };
 
   S3.prototype.queueIt = function(logFilePath, cb) {
