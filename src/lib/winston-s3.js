@@ -150,7 +150,7 @@ module.exports = winston.transports.S3 = (function(superClass) {
     delete this.shipQueue[logFilePath];
     return new Promise((function (__this) {
       return function(resolve, reject) {
-        this.client.putFile(logFilePath, this._s3Path(), this._headers, (function(_this) {
+        __this.client.putFile(logFilePath, __this._s3Path(), __this._headers, (function(_this) {
           return function(err, res) {
             _this.shipping--;
             _this._shipNow();
