@@ -119,7 +119,8 @@ module.exports = winston.transports.S3 = (function(superClass) {
     return this.queueIt(logFilePath);
   };
 
-  S3.prototype.queueIt = function(logFilePath) {
+  S3.prototype.queueIt = function(logFilePath, cb) {
+    cb = typeof cb === 'function' ? cb : function () {}
     if (this.shipQueue === void 0) {
       this.shipQueue = {};
     }
@@ -130,7 +131,7 @@ module.exports = winston.transports.S3 = (function(superClass) {
     if (this._debug) {
       console.log("@shipQueue is " + (JSON.stringify(this.shipQueue)));
     }
-    return this._shipNow();
+    return this._shipNow(cb);
   };
 
   S3.prototype._shipNow = function(cb) {
